@@ -15,7 +15,7 @@ class PositionFactory extends Factory
      * @return array<string, mixed>
      */
 
-     public static $position_names = [
+    public static $position_names = [
         'エンジニア',
         '営業者'
      ];

@@ -22,7 +22,6 @@ class Project extends Model
     protected $casts = [
         'start_date' => 'datetime',
         'end_date' => 'datetime',
-        'password' => 'hashed',
     ];
 
     public function technologies() {

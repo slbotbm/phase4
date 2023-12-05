@@ -66,7 +66,7 @@ class DatabaseSeeder extends Seeder
             $number_of_employees = rand(3, 6);
             $employees = Employee::inRandomOrder()->limit($number_of_employees)->distinct()->get();
             foreach($employees as $employee) {
-                $project->employees()->attach($employee);
+                $project->employees()->attach($employee, ['employee_project_hours'=> rand(40, 80)] );
             }
         });
         

@@ -10,7 +10,6 @@ class Technology extends Model
     use HasFactory;
 
     protected $fillable = [
-        'position_name',
         'technology_name',
         'technology_field'
     ];
