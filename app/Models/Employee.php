@@ -9,7 +9,22 @@ class Employee extends Model
 {
     use HasFactory;
 
-    public function techologies() {
+    protected $fillable = [
+        'name',
+        'age',
+        'sex',
+        'start_of_employment',
+        'profile_url',
+        'still_working'
+    ];
+
+
+    protected $casts = [
+        'start_of_employment' => 'datetime',
+        'still_working' => 'boolean',
+    ];
+
+    public function technologies() {
         return $this->belongsToMany(Technology::class)->withTimestamps();
     }
 

@@ -14,10 +14,15 @@ class PositionFactory extends Factory
      *
      * @return array<string, mixed>
      */
+
+     public static $position_names = [
+        'エンジニア',
+        '営業者'
+     ];
     public function definition(): array
     {
         return [
-            //
+            'position_name'=>fake()->randomElement(self::$position_names)
         ];
     }
 }

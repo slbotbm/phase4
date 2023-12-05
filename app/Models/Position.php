@@ -9,6 +9,10 @@ class Position extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'position_name'
+    ];
+
     public function employees() {
         return $this->belongsToMany(Employee::class)->withPivot('employee_position_start_date');
     }

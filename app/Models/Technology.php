@@ -9,6 +9,12 @@ class Technology extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'position_name',
+        'technology_name',
+        'technology_field'
+    ];
+
     public function employees() {
         return $this->belongsToMany(Employee::class)->withTimestamps();
     }
