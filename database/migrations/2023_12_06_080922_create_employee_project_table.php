@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('employee_position', function (Blueprint $table) {
+        Schema::create('employee_project', function (Blueprint $table) {
             $table->id();
             $table->foreignId('employee_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('position_id')->constrained()->cascadeOnDelete();
-            $table->date('employee_position_start_date')->constrained()->cascadeOnDelete();
-            $table->unique(['position_id', 'employee_id']);
+            $table->foreignId('project_id')->constrained()->cascadeOnDelete();
+            $table->integer('employee_project_hours')->constrained()->cascadeOnDelete();
+            $table->unique(['project_id', 'employee_id']);
             $table->timestamps();
         });
     }
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('employee_position');
+        Schema::dropIfExists('employee_project');
     }
 };

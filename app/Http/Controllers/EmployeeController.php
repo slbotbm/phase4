@@ -13,7 +13,13 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        //
+        $employees = Employee::get();
+        $count = $employees->count();
+        for($i =0; $i < $count; $i++) {
+            $employees[$i]['technologies'] = $employees[$i]->technologies()->get();
+            $employees[$i]['projects'] = $employees[$i]->projects()->get();
+        }
+        return response()->view('employee.index', compact('employees'));
     }
 
     /**
@@ -37,7 +43,9 @@ class EmployeeController extends Controller
      */
     public function show(Employee $employee)
     {
-        //
+        $employee['technologies'] = $employee->technologies()->get();
+        $employee['projects'] = $employee->projects()->get();
+        return response()->view('employee.show', compact('employee'));
     }
 
     /**

@@ -2,6 +2,10 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\TechnologyController;
+use App\Http\Controllers\ProjectController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -16,6 +20,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::middleware('auth')->group(function() {
+    Route::resource('employee', EmployeeController::class);
+    Route::resource('technology', TechnologyController::class);
+    Route::resource('project', ProjectController::class);
 });
 
 Route::get('/dashboard', function () {

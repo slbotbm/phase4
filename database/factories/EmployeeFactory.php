@@ -17,7 +17,12 @@ class EmployeeFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'name'=>fake()->name(),
+            'age'=>fake()->numberBetween(18, 50),
+            'sex'=>fake()->randomElement(["男性","女性"]),
+            'start_of_employment'=>fake()->dateTimeBetween('-8 years', 'now'),
+            'profile_url'=>'https://fusic.co.jp/members/' . fake()->numberBetween(1, 100),
+            'still_working' => fake()->boolean()
         ];
     }
 }
