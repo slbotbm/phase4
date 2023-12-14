@@ -9,7 +9,7 @@ use \App\Models\Employee;
 use \App\Models\Position;
 use \App\Models\Project;
 use \App\Models\Technology;
-use \Database\Factories\PositionFactory;
+
 use \Database\Factories\TechnologyFactory;
 
 class DatabaseSeeder extends Seeder
@@ -26,13 +26,6 @@ class DatabaseSeeder extends Seeder
             'email' => 'test@example.com',
         ]);
 
-        $position_names = PositionFactory::$position_names;
-        foreach($position_names as $position) {
-            Position::factory()->create([
-                'position_name' => $position,
-            ]);
-        }
-
 
         $technology_names = array_keys(TechnologyFactory::$technology);
         foreach ($technology_names as $technology_name) {
@@ -46,9 +39,7 @@ class DatabaseSeeder extends Seeder
             
             $start_employment = $employee->start_of_employment;
             $position_start_date = $start_employment->subSeconds(rand(0, now()->diffInSeconds($start_employment)));
-            $position = Position::inRandomOrder()->first();
-            $employee->positions()->attach($position, ['employee_position_start_date' => $position_start_date]);
-
+            // TODO
             $number_of_technologies = rand(1, 3);
             $technologies = Technology::inRandomOrder()->limit($number_of_technologies)->distinct()->get();
             foreach($technologies as $technology) {
@@ -66,7 +57,7 @@ class DatabaseSeeder extends Seeder
             $number_of_employees = rand(3, 6);
             $employees = Employee::inRandomOrder()->limit($number_of_employees)->distinct()->get();
             foreach($employees as $employee) {
-                $project->employees()->attach($employee, ['employee_project_hours'=> rand(40, 80)] );
+                $project->employees()->attach($employee, ['employee_project_hours'=> rand(30, 60)] );
             }
         });
         

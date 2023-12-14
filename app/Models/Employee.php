@@ -28,11 +28,7 @@ class Employee extends Model
         return $this->belongsToMany(Technology::class)->withTimestamps();
     }
 
-    public function positions() {
-        return $this->belongsToMany(Position::class)->withTimestamps();
-    }
-
     public function projects() {
-        return $this->belongsToMany(Project::class)->withPivot('project_employee_hours');
+        return $this->belongsToMany(Project::class)->withPivot('employee_project_hours');
     }
 }

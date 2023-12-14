@@ -13,7 +13,13 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        //
+        $projects = Project::get();
+        $count = $projects->count();
+        for($i = 0; $i < $count; $i++){
+            $projects[$i]['technologies'] = $projects[$i]->technologies()->get();
+            $projects[$i]['employees'] = $projects[$i]->employees()->get();
+        }
+        return response()->view('project.index', compact('projects'));
     }
 
     /**
@@ -37,7 +43,9 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        //
+        $project['technologies'] = $project->technologies()->get();
+        $project['employees'] = $project->employees()->get();
+        return response()->view('project.show', compact('project'));
     }
 
     /**
