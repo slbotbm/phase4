@@ -2,10 +2,6 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\EmployeeController;
-use App\Http\Controllers\TechnologyController;
-use App\Http\Controllers\ProjectController;
-
 
 /*
 |--------------------------------------------------------------------------
@@ -22,12 +18,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::middleware('auth')->group(function() {
-    Route::resource('employee', EmployeeController::class);
-    Route::resource('technology', TechnologyController::class);
-    Route::resource('project', ProjectController::class);
-});
-
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -37,5 +27,14 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+Route::get('/looking', function () {
+    return view('looking');
+})->name('looking.page');
+
+Route::get('/change', function () {
+    return view('change');
+})->name('change.page');
+
 
 require __DIR__.'/auth.php';
