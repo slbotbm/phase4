@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\GanttController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,6 +36,8 @@ Route::get('/looking', function () {
 Route::get('/change', function () {
     return view('change');
 })->name('change.page');
+
+Route::get('/sample/dhtmlx/gantt',[GanttController::class, 'view_gantt'])->name('sample.dhtmlx.gant');
 
 
 require __DIR__.'/auth.php';
