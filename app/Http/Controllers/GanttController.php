@@ -14,6 +14,18 @@ class GanttController extends Controller
   {
     return view('sample.dhtmlx.gantt');
   }
+
+  public function get_json()
+  {
+    $tasks = new Task();
+    $links = new Link();
+
+    return response()->json([
+      "data" => $tasks->all(),
+      "links" => $links->all(),
+    ]);
+  }
+
 }
 
 
