@@ -36,7 +36,7 @@
                             gantt.init("gantt_here"); // 表示　※最低限この行だけあれば表示は可能
                             gantt.config.columns = [
                                 {name:"add", label:"", width:50, align:"left" },
-                                {name:"text", label:"<div class='searchEl'>name</div>", width:250, tree:true},                        
+                                {name:"text", label:"<div class='searchEl'>name </div>", width:250, tree:true},                        
                                     // other columns
                                 ];
 
