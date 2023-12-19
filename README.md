@@ -6,7 +6,6 @@
 #### カンサル：
 - `Positions`モデル、ファクトリー、コントローラの削除
 - 各コントローラ内に`index()`と`show()`関数を定義し、`Employee`, `Project`, `Technology`の一覧画面と詳細画面を作りました。（例だけ）
-- `Project`テーブルにプロジェクトの状況のカラムを追加しました
 ### １２月５日：
 #### カンサル：
 - `Employee`, `Project`, `Technology`, `Positions`というモデルの定義とモデル間の連携
