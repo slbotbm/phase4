@@ -60,6 +60,8 @@ class DatabaseSeeder extends Seeder
                 $project->employees()->attach($employee, ['employee_project_hours'=> rand(30, 60)] );
             }
         });
+
+        $this->call(TaskSeeder::class);
         
     }
 }

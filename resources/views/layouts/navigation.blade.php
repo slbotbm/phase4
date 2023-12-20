@@ -19,7 +19,7 @@
 
                 <!-- Navigation Links looking -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('looking.page')" :active="request()->routeIs('looking.page')">
+                    <x-nav-link :href="route('search.input')" :active="request()->routeIs('search.input')">
                         {{ __('人を探す') }}
                     </x-nav-link>
                 </div>
@@ -94,7 +94,7 @@
         </div>
         <!-- Navigation Links change -->
         <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-            <x-nav-link :href="route('change.page')" :active="request()->routeIs('change.page')">
+            <x-nav-link :href="route('search.input')" :active="request()->routeIs('search.input')">
                 {{ __('ステータス変更') }}
             </x-nav-link>
         </div>

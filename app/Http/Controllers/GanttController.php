@@ -17,12 +17,14 @@ class GanttController extends Controller
 
   public function get_json()
   {
-    $tasks = new Task();
-    $links = new Link();
+    $tasks = Task::get()->all();
+    $links = Link::get()->all();
+
+
 
     return response()->json([
-      "data" => $tasks->all(),
-      "links" => $links->all(),
+      "data" => $tasks,
+      "links" => $links,
     ]);
   }
 

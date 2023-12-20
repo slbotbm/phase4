@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\TechnologyController;
 use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\SearchController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,9 +24,12 @@ Route::get('/', function () {
 });
 
 Route::middleware('auth')->group(function() {
+    Route::get('/search/input', [SearchController::class, 'create'])->name('search.input');
+    Route::get('/search/result', [SearchController::class, 'index'])->name('search.result');
     Route::resource('employee', EmployeeController::class);
     Route::resource('technology', TechnologyController::class);
     Route::resource('project', ProjectController::class);
+    Route::resource('search', SearchController::class);
 });
 
 Route::get('/dashboard', function () {

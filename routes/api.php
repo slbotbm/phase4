@@ -1,5 +1,8 @@
 <?php
 
+namespace App\Http\Controllers;
+
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -19,13 +22,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::get('/data', [GanttController::class, 'get_json']);
-Route::resources([
-  'task' => TaskController::class,
-  'link' => LinkController::class,
-]);
+// Route::resources([
+//   'task' => TaskController::class,
+//   'link' => LinkController::class,
+// ]);
 
-// または
+// // または
 
-Route::resource('task', TaskController::class);
-Route::resource('link', LinkController::class);
+// Route::resource('task', TaskController::class);
+// Route::resource('link', LinkController::class);
 
