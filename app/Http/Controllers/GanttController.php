@@ -9,7 +9,6 @@ use App\Models\Link;
 
 class GanttController extends Controller
 {
-  // ガントチャートのページを表示
   public function view_gantt()
   {
     return view('sample.dhtmlx.gantt');
@@ -19,8 +18,6 @@ class GanttController extends Controller
   {
     $tasks = Task::get()->all();
     $links = Link::get()->all();
-
-
 
     return response()->json([
       "data" => $tasks,

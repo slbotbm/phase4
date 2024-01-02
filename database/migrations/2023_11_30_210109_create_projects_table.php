@@ -20,6 +20,7 @@ return new class extends Migration
             $table->date("end_date");
             $table->integer("hours_required_per_month");
             $table->integer("cost");
+            $table->string("status");
             $table->timestamps();
         });
     }

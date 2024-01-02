@@ -29,7 +29,6 @@ Route::middleware('auth')->group(function() {
     Route::resource('employee', EmployeeController::class);
     Route::resource('technology', TechnologyController::class);
     Route::resource('project', ProjectController::class);
-    Route::resource('search', SearchController::class);
 });
 
 Route::get('/dashboard', function () {
@@ -42,15 +41,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/looking', function () {
-    return view('looking');
-})->name('looking.page');
 
 Route::get('/change', function () {
     return view('change');
 })->name('change.page');
-
-Route::get('/sample/dhtmlx/gantt',[GanttController::class, 'view_gantt'])->name('sample.dhtmlx.gant');
 
 
 require __DIR__.'/auth.php';

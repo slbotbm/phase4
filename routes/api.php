@@ -21,14 +21,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/data', [GanttController::class, 'get_json']);
-// Route::resources([
-//   'task' => TaskController::class,
-//   'link' => LinkController::class,
-// ]);
-
-// // または
-
-// Route::resource('task', TaskController::class);
-// Route::resource('link', LinkController::class);
+Route::get('/data', [ProjectController::class, 'getProjectDataforGantt']);
 

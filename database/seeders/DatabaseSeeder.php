@@ -39,7 +39,6 @@ class DatabaseSeeder extends Seeder
             
             $start_employment = $employee->start_of_employment;
             $position_start_date = $start_employment->subSeconds(rand(0, now()->diffInSeconds($start_employment)));
-            // TODO
             $number_of_technologies = rand(1, 3);
             $technologies = Technology::inRandomOrder()->limit($number_of_technologies)->distinct()->get();
             foreach($technologies as $technology) {
@@ -60,9 +59,6 @@ class DatabaseSeeder extends Seeder
                 $project->employees()->attach($employee, ['employee_project_hours'=> rand(30, 60)] );
             }
         });
-
-        $this->call(TaskSeeder::class);
-        
     }
 }
 ;

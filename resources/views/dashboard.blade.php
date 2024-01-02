@@ -28,21 +28,24 @@
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                        <div id="gantt_here" style='width: 100%; height: 400px;'>
-                        </div>
+                        <div id="gantt_here" style='width: 100%; height: 800px;'>
                         <script>
-                            gantt.config.date_format = "%Y-%m-%d %H:%i:%s"; // オプション：日付フォーマット設定
-                            gantt.i18n.setLocale("jp"); // オプション：言語設定
-                            gantt.init("gantt_here"); // 表示　※最低限この行だけあれば表示は可能
+                            gantt.config.date_format = "%Y-%m-%d"; 
+                            gantt.i18n.setLocale("jp"); 
+                            gantt.config.scales = [
+                                {unit:"month", step:1, format:"%Y年%M"},
+                                {unit:"week", step:1, format: "%d日"},
+                            ];
+                            gantt.config.scale_height = 54; 
                             gantt.config.columns = [
-                                {name:"add", label:"", width:50, align:"left" },
-                                {name:"text", label:"<div class='searchEl'>name</div>", width:250, tree:true},                        
-                                    // other columns
+                                    {name:"text", label:"案件名", width:200, tree:true},
+                                    {name:"start_date", label:"開始月日", align:"center"},
+                                    {name:"end_date", label:"終了月日", align:"center"},
                                 ];
-
-                        gantt.load("/api/data");
+                            gantt.init("gantt_here"); 
+                            gantt.load("/api/data");
                         </script>
-
+                        </div>
                 </div>
             </div>
         </div>
