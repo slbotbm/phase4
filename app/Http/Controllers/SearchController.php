@@ -17,4 +17,8 @@ class SearchController extends Controller
     public function create() {
         return response()->view('search.input');    
     }
+    
+    public function see() {
+        return response()->view("see");
+    }
 }

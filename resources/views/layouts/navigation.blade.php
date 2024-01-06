@@ -19,8 +19,8 @@
 
                 <!-- Navigation Links looking -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('search.input')" :active="request()->routeIs('search.input')">
-                        {{ __('人を探す') }}
+                    <x-nav-link :href="route('see')" :active="request()->routeIs('see')">
+                        {{ __('検索') }}
                     </x-nav-link>
                 </div>
                 <!-- Navigation Links change -->
@@ -84,6 +84,11 @@
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('project.gantt')" :active="request()->routeIs('project.gantt')">
                 {{ __('HOME') }}
+            </x-responsive-nav-link>
+        </div>
+        <div class="pt-2 pb-3 space-y-1">
+            <x-responsive-nav-link :href="route('see')" :active="request()->routeIs('see')">
+                {{ __('検索') }}
             </x-responsive-nav-link>
         </div>
         <!-- Navigation Links change -->
