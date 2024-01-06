@@ -34,7 +34,7 @@
                             gantt.i18n.setLocale("jp"); 
                             gantt.config.scales = [
                                 {unit:"month", step:1, format:"%Y年%M"},
-                                {unit:"week", step:1, format: "%d日"},
+                                // {unit:"week", step:1, format: "%d日"},
                             ];
                             gantt.config.scale_height = 54; 
                             gantt.config.columns = [
@@ -43,7 +43,9 @@
                                     {name:"end_date", label:"終了月日", align:"center"},
                                 ];
                             gantt.init("gantt_here"); 
-                            gantt.load("/api/data");
+                            
+                            var jsonData = {!! $response->getContent() !!}; 
+                            gantt.parse(jsonData);
                         </script>
                         </div>
                 </div>

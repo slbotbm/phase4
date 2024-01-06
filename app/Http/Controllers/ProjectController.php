@@ -10,12 +10,12 @@ class ProjectController extends Controller
 {
     public function index()
     {
-        echo "NOthing here";
+        echo "Nothing here";
     }
 
     public function getProjectDataforGantt()
     {
-        $projects = Project::get();
+        $projects = Project::orderBY('start_date', 'asc')->get();
         $tasks = [];
         $links = [];
 
@@ -98,10 +98,12 @@ class ProjectController extends Controller
             }
         }
 
-        return response()->json([
-        "data" => $tasks,
-        "links" => $links
-    ]);
+        $response = response()->json([
+            "data" => $tasks,
+            "links" => $links
+        ]);
+
+        return response()->view('dashboard', compact('response'));
     }
 
 

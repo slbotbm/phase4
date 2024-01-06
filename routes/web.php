@@ -26,14 +26,15 @@ Route::get('/', function () {
 Route::middleware('auth')->group(function() {
     Route::get('/search/input', [SearchController::class, 'create'])->name('search.input');
     Route::get('/search/result', [SearchController::class, 'index'])->name('search.result');
+    Route::get('/dashboard', [ProjectController::class, 'getProjectDataforGantt'])->name('project.gantt');
     Route::resource('employee', EmployeeController::class);
     Route::resource('technology', TechnologyController::class);
     Route::resource('project', ProjectController::class);
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
