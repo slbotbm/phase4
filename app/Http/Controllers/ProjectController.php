@@ -10,7 +10,7 @@ class ProjectController extends Controller
 {
     public function index()
     {
-        echo "Nothing here";
+        return response()->view('project.index');
     }
 
     public function getProjectDataforGantt()

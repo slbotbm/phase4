@@ -21,4 +21,16 @@ class SearchController extends Controller
     public function see() {
         return response()->view("see");
     }
+
+    public function employeeSearch() {
+        echo "Connected";
+    }
+
+    public function projectSearch() {
+        echo "Connected";
+    }
+
+    public function technologySearch() {
+        echo "Connected";
+    }
 }

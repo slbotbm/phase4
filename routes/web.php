@@ -26,6 +26,9 @@ Route::get('/', function () {
 Route::middleware('auth')->group(function() {
     Route::get('/search/input', [SearchController::class, 'create'])->name('search.input');
     Route::get('/search/result', [SearchController::class, 'index'])->name('search.result');
+    Route::get('/engineer/search', [SearchController::class, 'employeeSearch'])->name('search.employee');
+    Route::get('/project/search', [SearchController::class, 'projectSearch'])->name('search.project');
+    Route::get('/technology/search', [SearchController::class, 'technologySearch'])->name('search.technology');
     Route::get('/see', [SearchController::class, 'see'])->name('see');
     Route::get('/dashboard', [ProjectController::class, 'getProjectDataforGantt'])->name('project.gantt');
     Route::resource('employee', EmployeeController::class);
