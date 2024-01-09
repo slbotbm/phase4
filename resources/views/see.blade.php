@@ -5,15 +5,15 @@
     </h2>
   </x-slot>
 <div class="py-12">
-    <div class="max-w-7xl mx-auto sm:w-8/12 md:w-1/2 lg:w-5/12">
-      <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-        <div class="p-6 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-800 ">
-
-  <h3 class="text-left font-bold text-lg text-gray-dark dark:text-gray-200"><a href = "{{route('employee.index')}}">エンジニア</a></h3>
-  <h3 class="text-left font-bold text-lg text-gray-dark dark:text-gray-200"><a href = "{{route('project.index')}}">案件</a></h3>
-  <h3 class="text-left font-bold text-lg text-gray-dark dark:text-gray-200"><a href = "{{route('technology.index')}}">技術</a></h3>
-</div>
-</div>
-</div>
+  <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+    <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+        <div class="p-6 text-gray-900 dark:text-gray-100">
+          <h3 class="text-left font-bold text-lg text-gray-dark dark:text-gray-200" style="padding: 5px;"><a href = "{{route('employee.index')}}">エンジニア</a></h3>
+          <h3 class="text-left font-bold text-lg text-gray-dark dark:text-gray-200"style="padding: 5px;"><a href = "{{route('project.index')}}">案件</a></h3>
+          <h3 class="text-left font-bold text-lg text-gray-dark dark:text-gray-200"style="padding: 5px;"><a href = "{{route('technology.index')}}">技術</a></h3>
+        <div>
+      </div>
+    </div>
+  </div> 
 </div>
 </x-app-layout>
