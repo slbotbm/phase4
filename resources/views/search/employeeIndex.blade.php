@@ -25,7 +25,7 @@
                                 <option value="free">暇</option>
                                 <option value="overtime">残業</option>
                                 <option value="employment_start">就職の開始</option>
-                                <option value="project_number">案件の数</option>
+                                <option value="number_of_projects">案件の数</option>
                             </select>
                             </div>
                         </td>
@@ -41,8 +41,6 @@
                     </tr>
                 </tbody>
             </table>
-
-            </div>
             @include('common.errors')
               <x-primary-button class="ml-3">
                 {{ __('検索') }}
@@ -51,6 +49,10 @@
           </form>
         </div>
       </div>
+      @foreach($response as $employee) 
+              <p>{{$employee->name}}</p>
+            @endforeach
+            </div>
     </div>
   </div>
 </x-app-layout>

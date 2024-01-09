@@ -23,17 +23,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::middleware('auth')->group(function() {
+Route::middleware('auth')->group(function () {
     Route::get('/search/input', [SearchController::class, 'create'])->name('search.input');
     Route::get('/search/result', [SearchController::class, 'index'])->name('search.result');
-    Route::get('/engineer/search', [SearchController::class, 'employeeSearch'])->name('search.employee');
-    Route::get('/project/search', [SearchController::class, 'projectSearch'])->name('search.project');
-    Route::get('/technology/search', [SearchController::class, 'technologySearch'])->name('search.technology');
-    Route::get('/see', [SearchController::class, 'see'])->name('see');
+    Route::get('/search/employeeSearch', [SearchController::class, 'employeeSearch'])->name('search.employee');
+    Route::get('/search/projectSearch', [SearchController::class, 'projectSearch'])->name('search.project');
+    Route::get('/search/technologySearch', [SearchController::class, 'technologySearch'])->name('search.technology');
+    Route::get("/search/init", [SearchController::class, 'init'])->name('search.init');
     Route::get('/dashboard', [ProjectController::class, 'getProjectDataforGantt'])->name('project.gantt');
-    Route::resource('employee', EmployeeController::class);
-    Route::resource('technology', TechnologyController::class);
-    Route::resource('project', ProjectController::class);
 });
 
 // Route::get('/dashboard', function () {

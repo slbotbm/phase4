@@ -8,11 +8,6 @@ use App\Models\Project;
 
 class ProjectController extends Controller
 {
-    public function index()
-    {
-        return response()->view('project.index');
-    }
-
     public function getProjectDataforGantt()
     {
         $projects = Project::orderBY('start_date', 'asc')->get();

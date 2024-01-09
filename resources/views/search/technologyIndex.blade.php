@@ -21,7 +21,7 @@
                 <option value="None">未選択</option>
                 <option value="backend">バックエンド</option>
                 <option value="frontend">フロントエンド</option>
-                <option value="serverside">サーバーサイド</option>
+                <option value="server-side">サーバーサイド</option>
             </select>
             </div>
 
