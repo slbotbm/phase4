@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('sex');
             $table->date('start_of_employment');
             $table->string('profile_url');
-            $table->boolean('still_working');
             $table->timestamps();
         });
     }

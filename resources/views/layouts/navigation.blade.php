@@ -5,22 +5,22 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
+                    <a href="{{ route('project.gantt') }}">
                         <x-application-logo class="block h-9 w-auto fill-current text-gray-800 dark:text-gray-200" />
                     </a>
                 </div>
 
                 <!-- Navigation Links HOME -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                    <x-nav-link :href="route('project.gantt')" :active="request()->routeIs('project.gantt')">
                         {{ __('HOME') }}
                     </x-nav-link>
                 </div>
 
                 <!-- Navigation Links looking -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('looking.page')" :active="request()->routeIs('looking.page')">
-                        {{ __('人を探す') }}
+                    <x-nav-link :href="route('see')" :active="request()->routeIs('see')">
+                        {{ __('検索') }}
                     </x-nav-link>
                 </div>
                 <!-- Navigation Links change -->
@@ -82,19 +82,18 @@
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <!-- Navigation Links HOME -->
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+            <x-responsive-nav-link :href="route('project.gantt')" :active="request()->routeIs('project.gantt')">
                 {{ __('HOME') }}
             </x-responsive-nav-link>
         </div>
-        <!-- Navigation Links looking -->
-        <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-            <x-nav-link :href="route('looking.page')" :active="request()->routeIs('looking.page')">
-                {{ __('人を探す') }}
-            </x-nav-link>
+        <div class="pt-2 pb-3 space-y-1">
+            <x-responsive-nav-link :href="route('see')" :active="request()->routeIs('see')">
+                {{ __('検索') }}
+            </x-responsive-nav-link>
         </div>
         <!-- Navigation Links change -->
         <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-            <x-nav-link :href="route('change.page')" :active="request()->routeIs('change.page')">
+            <x-nav-link :href="route('search.input')" :active="request()->routeIs('search.input')">
                 {{ __('ステータス変更') }}
             </x-nav-link>
         </div>
