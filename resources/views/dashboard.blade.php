@@ -11,9 +11,8 @@
             height: 100%;
             padding: 0px;
             margin: 0px;
-            overflow: hidden;
+            overflow: auto;
         }
-
     </style>
 </head>
 
@@ -28,7 +27,7 @@
         <div class="py-12">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                        <div id="gantt_here" style='width: 100%; height: 800px;'>
+                    <div id="gantt_here" style='width: 100%; height: 600px;'>         
                         <script>
                             gantt.config.date_format = "%Y-%m-%d"; 
                             gantt.i18n.setLocale("jp"); 
@@ -47,7 +46,7 @@
                             var jsonData = {!! $response->getContent() !!}; 
                             gantt.parse(jsonData);
                         </script>
-                        </div>
+                    <div>
                 </div>
             </div>
         </div>
