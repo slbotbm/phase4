@@ -26,7 +26,7 @@
             </div>
 
             @include('common.errors')
-              <x-primary-button class="ml-3">
+              <x-primary-button class="ml-3" style="background-color: #9acd23">
                 {{ __('検索') }}
               </x-primary-button>
             </div>
