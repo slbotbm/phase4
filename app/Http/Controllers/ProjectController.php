@@ -10,7 +10,7 @@ class ProjectController extends Controller
 {
     public function getProjectDataforGantt()
     {
-        $projects = Project::orderBY('start_date', 'asc')->get();
+        $projects = Project::orderBy('start_date', 'asc')->get();
         $tasks = [];
         $links = [];
 
@@ -25,7 +25,7 @@ class ProjectController extends Controller
                 $tasks,
                 [
                     "id" => $project->id,
-                    "text" => $project->project_name,
+                    "text" => $project->name,
                     "start_date" => $project->start_date->format('Y-m-d'),
                     "end_date"=>$project->end_date->format('Y-m-d'),
                     "type"=>"project",
@@ -49,6 +49,8 @@ class ProjectController extends Controller
                 } else {
                     $employee_progress = 0;
                 }
+
+
                 array_push(
                     $tasks,
                     [
@@ -56,7 +58,7 @@ class ProjectController extends Controller
                         "text" => $employee->name,
                         "start_date" => $employee_start_date->format('Y-m-d'), 
                         "duration" => $employee_duration,
-                        "parent" => $project->id
+                        "parent" => $project->id,
                     ]
                 );
                 if ($count != 0) {
@@ -101,7 +103,9 @@ class ProjectController extends Controller
         return response()->view('dashboard', compact('response'));
     }
 
-
+    public function index() {
+        return redirect()->route('search.project');
+    }
     /**
      * Show the form for creating a new resource.
      */

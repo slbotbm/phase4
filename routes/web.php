@@ -24,6 +24,9 @@ Route::get('/', function () {
 });
 
 Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::get('/search/input', [SearchController::class, 'create'])->name('search.input');
     Route::get('/search/result', [SearchController::class, 'index'])->name('search.result');
     Route::get('/search/employeeSearch', [SearchController::class, 'employeeSearch'])->name('search.employee');
@@ -31,16 +34,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/search/technologySearch', [SearchController::class, 'technologySearch'])->name('search.technology');
     Route::get("/search/init", [SearchController::class, 'init'])->name('search.init');
     Route::get('/dashboard', [ProjectController::class, 'getProjectDataforGantt'])->name('project.gantt');
-});
-
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::resource('project', ProjectController::class);
+    Route::resource('employee', EmployeeController::class);
+    Route::resource('technology', TechnologyController::class);
 });
 
 

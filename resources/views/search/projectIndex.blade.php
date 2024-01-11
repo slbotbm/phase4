@@ -23,7 +23,7 @@
                             <div class="flex flex-col mb-4">
                             <x-input-label for="category" :value="__('エンジニアのカテゴリー')" />
                             <select id="category" name="category" class="block mt-1 w-full rounded-md shadow-sm focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                <option value="None">未選択</option>
+                                <option value="None" selected>未選択</option>
                                 <option value="start_date">開始日</option>
                                 <option value="end_date">終了日</option>
                                 <option value="price">金額</option>
@@ -40,8 +40,6 @@
                             </select>
                             </div>
                         </td>
-                    </tr>
-                    <tr>
                         <td class="py-4 px-6">
                             <div class="flex flex-col mb-4">
                             <x-input-label for="condition" :value="__('案件の状況')" />
@@ -53,17 +51,31 @@
                             </select>
                             </div>
                         </td>
+                        <td>
+                          <x-primary-button class="ml-3">
+                {{ __('検索') }}
+              </x-primary-button>
+                        </td>
                     </tr>
                 </tbody>
             </table>
             
             </div>
-              <x-primary-button class="ml-3">
-                {{ __('検索') }}
-              </x-primary-button>
+            </form>
+            <table class="text-center w-full border-collapse">
+            <tbody>
+              @foreach($response as $project) 
+              <tr class="hover:bg-gray-lighter">
+                <td class="py-4 px-6 border-b border-gray-light dark:border-gray-600">
+                  <h3 class="text-left font-bold text-lg text-gray-dark dark:text-gray-200"><a href="{{route('project.show', $project->id)}}">{{$project->name}}</a></h3>
+                </td>
+              </tr>
+            @endforeach
+            </tbody>
+            </table>
             </div>
-          </form>
         </div>
+            {{$response->links()}}
       </div>
     </div>
   </div>
