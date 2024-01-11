@@ -24,33 +24,43 @@ class SearchController extends Controller
 
     public function employeeSearch(Request $request) {
         $keyword = $request->keyword;
-        $category = $request->category;
+        $category = $request->category; 
         $order = $request->order;
         $query = Employee::query();
-        if ($keyword and (strlen(trim($keyword))>0)) {
+
+        if ($keyword && strlen(trim($keyword)) > 0) {
             $query->where('name', 'like', '%' . $keyword . '%');
         }
-        if ($category === 'overtime') {
-            $query->selectRaw('employees.* , (160 - COALESCE(SUM(employee_project_hours), 0)) as remaining_hours')
-                  ->leftJoin('employee_project','employees.id','=','employee_project.employee_id')
-                  ->groupBy('employees.id');
-            if ($order === 'desc') {
-                $query->orderBy('remaining_hours', 'desc');
-            }
-        } else if ($category === 'employment_start') {
+        if ($category === 'employment_start') {
             $query->orderBy("start_of_employment", $order);
-        } else if ($category === "number_of_projects"){
-            $query->withCount('projects');
-            if ($order === 'desc') {
-                $query->orderbyDesc('projects_count');
+        } else {
+            switch ($category) {
+                case 'overtime':
+                    $query->selectRaw('employees.* , (160 - COALESCE(SUM(employee_project_hours), 0)) as remaining_hours')
+                        ->leftJoin('employee_project', 'employees.id', '=', 'employee_project.employee_id')
+                        ->groupBy('employees.id');
+                    if ($order === "desc") {
+                        $query->orderbyDesc('remaining_hours');
+                    }
+                    break;
+                case "number_of_projects":
+                    $query->withCount('projects');
+                    if ($order === "desc") {
+                        $query->orderbyDesc('projects_count');
+                    }
+                    break;
+                case 'free':
+                    $query->selectRaw('employees.* , SUM(employee_project_hours) as total_hours')
+                        ->join('employee_project', 'employees.id', '=', 'employee_project.employee_id')
+                        ->groupBy('employees.id');
+                    if ($order === "desc") {
+                        $query->orderbyDesc('total_hours');
+                    }
+                    break;
+                default:
+                    break;
             }
-        } else if ($category === 'free'){
-            $query->selectRaw('employees.* , SUM(employee_project_hours) as total_hours')
-                ->join('employee_project','employees.id','=','employee_project.employee_id')
-                ->groupBy('employees.id');
-            if ($order === 'desc') {
-                $query->orderBy('total_hours', 'desc');
-            }
+            
         }
 
         $response = $query->paginate(20);
@@ -61,7 +71,7 @@ class SearchController extends Controller
         $keyword = $request->keyword;
         $category = $request->category;
         $order = $request->order;
-        $condition = $request->condition;
+        $status = $request->condition;
 
         $query = Project::query();
 
@@ -71,25 +81,38 @@ class SearchController extends Controller
                   ->orWhere('details','like', '%' . $keyword . '%');
         }
 
-        if ($category==='start_date') {
-            $query->orderBy("start_date", $order);
-        } else if ($category === 'end_date') {
-            $query->orderBy("end_date", $order);
-        } else if ($category === 'price') {
-            $query->orderBy('cost', $order);
-        } else if ($category === 'number_of_engineers') {
-            $query->withCount('employees');
-            if ($order === 'desc') {
-                $query->orderbyDesc('employees_count');
-            }
+        switch ($status) {
+            case 'before_creation':
+                $query->whereIn('status', ['受注前']);
+                break;
+            case "in_creation":
+                $query->whereIn('status', ['構築中']);
+                break;
+            case "after_creation":
+                $query->whereIn('status', ['納品済み']);
+                break;
+            default:
+                break;
         }
 
-        if ($condition === 'before_creation') {
-            $query->whereIn('status', ['受注前']);
-        } else if ($condition === 'in_creation') {
-            $query->whereIn('status', ['構築中']);
-        } else if ($condition === 'after_creation') {
-            $query->whereIn('status', ['納品済み']);
+        switch($category) {
+            case 'start_date':
+               $query->orderBy("start_date", $order);
+               break;
+            case 'end_date':
+                $query->orderBy("end_date", $order);
+                break;
+            case "price":
+                $query->orderBy('cost', $order);
+                break;
+            case 'number_of_engineers':
+                $query->withCount('employees');
+                if ($order === 'desc') {
+                    $query->orderbyDesc('employees_count');
+                }
+                break;
+            default:
+                break;
         }
 
         $response = $query->paginate(20);
@@ -107,12 +130,18 @@ class SearchController extends Controller
             $query->where('name', 'like', '%' . $keyword . '%');
         }
 
-        if ($category === "backend") {
-            $query->whereIn('technology_field', ["backend"]);
-        } else if ($category === "frontend") {
-            $query->whereIn('technology_field', ["frontend"]);
-        } else if ($category === "server-side") {
-            $query->whereIn('technology_field', ["server-side"]);
+        switch($category) {
+            case "backend":
+               $query->whereIn('technology_field', ["backend"]);
+               break;
+            case "frontend":
+                $query->whereIn('technology_field', ["frontend"]);
+                break;
+            case "server-side":
+                $query->whereIn('technology_field', ["server-side"]);
+                break;
+            default:
+                break;
         }
 
         $response = $query->paginate(20);
