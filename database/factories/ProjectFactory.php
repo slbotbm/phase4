@@ -26,7 +26,7 @@ class ProjectFactory extends Factory
             $status = "納品済み";
         }
         return [
-            'project_name' => fake()->realText($maxNbChars = 30),
+            'name' => fake()->realText($maxNbChars = 30),
             'customer_name'=> fake()->company(),
             'details'=> fake()->realText($maxNbChars = 700, $indexSize = 5),
             'start_date'=>$start_date,

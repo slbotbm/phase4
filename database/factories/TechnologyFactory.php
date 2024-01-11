@@ -47,7 +47,7 @@ class TechnologyFactory extends Factory
     {
         $technology_name = fake()->randomElement(array_keys(self::$technology));
         return [
-            'technology_name'=> $technology_name,
+            'name'=> $technology_name,
             'technology_field'=> self::$technology[$technology_name]
         ];
     }
