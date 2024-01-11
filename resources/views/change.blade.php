@@ -23,6 +23,9 @@
             botton_modal {
                 margin: 30px;
             }
+            .m-10{
+                margin: 50px;
+            }
         </style>
 
             <meta charset="UTF-8">
@@ -35,14 +38,12 @@
 
 
 
-             {{$employee->name}}
-
             
             <!-- ボタンをクリックするとモーダルが表示されるようにする -->
             <div class="py-12">
-                <botton_modal class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
-                        名前：宮本泰志<br>技術：フロント<br>言語：CSS
+                <botton_modal class="w-75">
+                    <button type="button" class="btn btn-primary btn-block m-10" data-toggle="modal" data-target="#myModal">
+                        名前：名前<br>技術：フロント<br>言語：CSS
                     </button>
                 </botton_modal>
             </div>
