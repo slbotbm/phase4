@@ -13,13 +13,7 @@ class TechnologyController extends Controller
      */
     public function index()
     {
-        $technologies = Technology::get();
-        $count = $technologies->count();
-        for($i = 0; $i < $count; $i++){
-            $technologies[$i]['employees'] = $technologies[$i]->employees()->get();
-            $technologies[$i]['projects'] = $technologies[$i]->projects()->get();
-        }
-        return response()->view('technology.index', compact('technologies'));
+        return redirect()->route('search.technology');
     }
 
     /**

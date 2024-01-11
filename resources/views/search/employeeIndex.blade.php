@@ -22,10 +22,11 @@
                             <div class="flex flex-col mb-4">
                             <x-input-label for="category" :value="__('エンジニアのカテゴリー')" />
                             <select id="category" name="category" class="block mt-1 w-full rounded-md shadow-sm focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                                <option value = "None" selected>未選定</option>
                                 <option value="free">暇</option>
                                 <option value="overtime">残業</option>
                                 <option value="employment_start">就職の開始</option>
-                                <option value="project_number">案件の数</option>
+                                <option value="number_of_projects">案件の数</option>
                             </select>
                             </div>
                         </td>
@@ -38,19 +39,32 @@
                             </select>
                             </div>
                         </td>
+                        <td>
+                          <x-primary-button class="ml-3">
+                {{ __('検索') }}
+              </x-primary-button>
+                        </td>
                     </tr>
                 </tbody>
             </table>
-
-            </div>
             @include('common.errors')
-              <x-primary-button class="ml-3" style="background-color:#40e0d0">
-                {{ __('検索') }}
-              </x-primary-button>
             </div>
           </form>
+          <table class="text-center w-full border-collapse">
+            <tbody>
+              @foreach($response as $employee) 
+              <tr class="hover:bg-gray-lighter">
+                <td class="py-4 px-6 border-b border-gray-light dark:border-gray-600">
+                  <h3 class="text-left font-bold text-lg text-gray-dark dark:text-gray-200"><a href="{{route('employee.show', $employee->id)}}">{{$employee->name}}</a></h3>
+                  <h3 class="text-left font-bold text-lg text-gray-dark dark:text-gray-200">{{$employee->remaining_hours}}</h3>
+                </td>
+              </tr>
+            @endforeach
+            </tbody>
+            </table>
         </div>
       </div>
+      {{$response->links()}}
     </div>
   </div>
 </x-app-layout>

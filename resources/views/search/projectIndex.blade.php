@@ -23,11 +23,11 @@
                             <div class="flex flex-col mb-4">
                             <x-input-label for="category" :value="__('エンジニアのカテゴリー')" />
                             <select id="category" name="category" class="block mt-1 w-full rounded-md shadow-sm focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                <option value="None">未選択</option>
+                                <option value="None" selected>未選択</option>
                                 <option value="start_date">開始日</option>
                                 <option value="end_date">終了日</option>
                                 <option value="price">金額</option>
-                                <option value="engineer_number">エンジニアの数</option>
+                                <option value="number_of_engineers">エンジニアの数</option>
                             </select>
                             </div>
                         </td>
@@ -35,18 +35,15 @@
                             <div class="flex flex-col mb-4">
                             <x-input-label for="order" :value="__('順序')" />
                             <select id="order" name="order" class="block mt-1 w-full rounded-md shadow-sm focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                <option value="None">未選択</option>
                                 <option value="desc">降順</option>
                                 <option value="asc">昇順</option>
                             </select>
                             </div>
                         </td>
-                    </tr>
-                    <tr>
                         <td class="py-4 px-6">
                             <div class="flex flex-col mb-4">
-                            <x-input-label for="category" :value="__('案件の状況')" />
-                            <select id="category" name="category" class="block mt-1 w-full rounded-md shadow-sm focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                            <x-input-label for="condition" :value="__('案件の状況')" />
+                            <select id="condition" name="condition" class="block mt-1 w-full rounded-md shadow-sm focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                                 <option value="None">未選択</option>
                                 <option value="before_creation">受注前</option>
                                 <option value="in_creation">構築中</option>
@@ -54,17 +51,31 @@
                             </select>
                             </div>
                         </td>
+                        <td>
+                          <x-primary-button class="ml-3">
+                {{ __('検索') }}
+              </x-primary-button>
+                        </td>
                     </tr>
                 </tbody>
             </table>
             
             </div>
-              <x-primary-button class="ml-3" style="background-color:#ff4f50">
-                {{ __('検索') }}
-              </x-primary-button>
+            </form>
+            <table class="text-center w-full border-collapse">
+            <tbody>
+              @foreach($response as $project) 
+              <tr class="hover:bg-gray-lighter">
+                <td class="py-4 px-6 border-b border-gray-light dark:border-gray-600">
+                  <h3 class="text-left font-bold text-lg text-gray-dark dark:text-gray-200"><a href="{{route('project.show', $project->id)}}">{{$project->name}}</a></h3>
+                </td>
+              </tr>
+            @endforeach
+            </tbody>
+            </table>
             </div>
-          </form>
         </div>
+            {{$response->links()}}
       </div>
     </div>
   </div>
