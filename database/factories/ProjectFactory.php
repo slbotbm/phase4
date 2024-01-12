@@ -16,14 +16,15 @@ class ProjectFactory extends Factory
      */
     public function definition(): array
     {
-        $start_date = fake()->dateTimeBetween('-6 months', '+1 year')->format('Y-m-d');
-        $end_date = fake()->dateTimeBetween($start_date, "+2 years")->format('Y-m-d');
-        if (date("Y-m-d") < $start_date) {
-            $status = "受注前";
-        } else if ($end_date > date("Y-m-d")) {
-            $status = "構築中";
+        $start_date = fake()->dateTimeBetween('-1 year', '+1 year');
+        $end_date = fake()->dateTimeBetween($start_date->modify("+3 month"), "+2 years")->format('Y-m-d');
+        $start_date = $start_date->format('Y-m-d');
+        if (date("Y-m-d") >= $end_date) {
+            $status = "納品済み"; 
+        } elseif (date("Y-m-d") >= $start_date && date("Y-m-d") <= $end_date) {
+            $status = "構築中";   
         } else {
-            $status = "納品済み";
+            $status = "受注前";  
         }
         return [
             'name' => fake()->realText($maxNbChars = 30),

@@ -23,61 +23,67 @@ class SearchController extends Controller
     }
 
     public function employeeSearch(Request $request) {
-        $keyword = $request->keyword;
-        $category = $request->category; 
-        $order = $request->order;
-        $speciality = $request->speciality;
+        $keyword = ($request->keyword === "None") ? null : $request->keyword;
+        $category = ($request->category === "None") ? null : $request->category; 
+        $order = ($request->order === "None") ? null : $request->order;
+        $speciality = ($request->speciality === "None") ? null : $request->speciality;
         $query = Employee::query();
 
         if ($keyword && strlen(trim($keyword)) > 0) {
             $query->where('name', 'like', '%' . $keyword . '%');
         }
 
-        if ($speciality !== "None") {
-            $query
-                ->select('employees.*')
+        if ($speciality !== null) {
+            $subQuery = Employee::selectRaw('employee_id')->distinct()
                 ->join('employee_technology', 'employees.id', '=', 'employee_technology.employee_id')
                 ->join('technologies', 'employee_technology.technology_id', '=', 'technologies.id')
-                ->where('technologies.technology_field', $speciality)
-                ->groupBy('employees.id', 'technologies.id');;
+                ->where('technologies.technology_field', $speciality);
+
+            $query->whereIn('employees.id', $subQuery);
         }
 
-        if ($category === 'employment_start') { //就職の開始
-            $query->orderBy("start_of_employment", $order);
-        } else {
-            switch ($category) {
-                case 'overtime': //残業
-                    $query->selectRaw('employees.* , (160 - COALESCE(SUM(employee_project_hours), 0)) as remaining_hours')
-                        ->leftJoin('employee_project', 'employees.id', '=', 'employee_project.employee_id')
-                        ->groupBy('employees.id');
-                    if ($order === "desc") {
-                        $query->orderbyDesc('remaining_hours');
-                    } else {
-                        $query->orderBy('remaining_hours');
-                    }
-                    break;
-                case "number_of_projects": //案件の数
-                    $query->withCount('projects');
-                    if ($order === "desc") {
-                        $query->orderbyDesc('projects_count');
-                    } else {
-                        $query->orderBy('projects_count');
-                    }   
-                    break;
-                case 'free': //暇
-                    $query->selectRaw('employees.* , SUM(employee_project_hours) as total_hours')
-                        ->join('employee_project', 'employees.id', '=', 'employee_project.employee_id')
-                        ->groupBy('employees.id');
-                    if ($order === "desc") {
-                        $query->orderbyDesc('total_hours');
-                    } else {
-                        $query->orderBy('total_hours');
-                    }
-                    break;
-                default:
-                    break;
+        if ($category !== null) {
+            if ($category === 'employment_start') { //就職の開始
+                $query->orderBy("start_of_employment", $order);
+            } else {
+                switch ($category) {
+                    case 'overtime': //残業
+                        $query->selectRaw('employees.* , (160 - COALESCE(SUM(employee_project_hours), 0)) as remaining_hours')
+                            ->leftJoin('employee_project', 'employees.id', '=', 'employee_project.employee_id')
+                            ->groupBy('employees.id')
+                            ->having('remaining_hours', '<=', 0);
+                        if ($order === "desc") {
+                            $query->orderbyDesc('remaining_hours');
+                        } else {
+                            $query->orderBy('remaining_hours');
+                        }
+                        break;
+                    case "number_of_projects": //案件の数
+                        $query->withCount('projects');
+                        if ($order === "desc") {
+                            $query->orderbyDesc('projects_count');
+                        } else {
+                            $query->orderBy('projects_count');
+                        }   
+                        break;
+                    case 'free': //暇
+                        $query->selectRaw('employees.* , SUM(employee_project_hours) as total_hours')
+                            ->join('employee_project', 'employees.id', '=', 'employee_project.employee_id')
+                            ->groupBy('employees.id');
+                        if ($order === "desc") {
+                            $query->orderbyDesc('total_hours');
+                        } else {
+                            $query->orderBy('total_hours');
+                        }
+                        break;
+                    default:
+                        break;
+                }
+                
             }
-            
+        }
+        if ($category === null && $order !== "desc") {
+            $query->orderBy("id", "desc");
         }
 
         $response = $query->get();
@@ -116,27 +122,27 @@ class SearchController extends Controller
             case 'start_date':
                 switch($order){
                     case "desc":
-                        query->orderByDesc("start_date");        
+                        $query->orderByDesc("start_date");        
                         break;
                     default:
-                        query->orderBy("start_date");    
+                        $query->orderBy("start_date");    
                         break;
                 }
                break;
             case 'end_date':
                 switch($order){
                     case "desc":
-                        query->orderByDesc("end_date");        
+                        $query->orderByDesc("end_date");        
                         break;
                     default:
-                        query->orderBy("end_date");    
+                        $query->orderBy("end_date");    
                         break;
                 }
                 break;
             case "price":
                 switch($order){
                     case "desc":
-                        query->orderByDesc("cost");        
+                        $query->orderByDesc("cost");        
                         break;
                     default:
                         $query->orderBy('cost');
