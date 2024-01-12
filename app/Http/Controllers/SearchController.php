@@ -33,13 +33,14 @@ class SearchController extends Controller
             $query->where('name', 'like', '%' . $keyword . '%');
         }
 
-        
-        if (in_array($speciality, ['frontend', 'backend', 'server-side'])) {
-            $query->whereHas('technologies', function ($q) use ($speciality) {
-                $q->where('technology_field', $speciality);
-            });
+        if ($speciality !== "None") {
+            $query
+                ->select('employees.*')
+                ->join('employee_technology', 'employees.id', '=', 'employee_technology.employee_id')
+                ->join('technologies', 'employee_technology.technology_id', '=', 'technologies.id')
+                ->where('technologies.technology_field', $speciality)
+                ->groupBy('employees.id', 'technologies.id');;
         }
-
 
         if ($category === 'employment_start') { //就職の開始
             $query->orderBy("start_of_employment", $order);
@@ -51,13 +52,17 @@ class SearchController extends Controller
                         ->groupBy('employees.id');
                     if ($order === "desc") {
                         $query->orderbyDesc('remaining_hours');
+                    } else {
+                        $query->orderBy('remaining_hours');
                     }
                     break;
                 case "number_of_projects": //案件の数
                     $query->withCount('projects');
                     if ($order === "desc") {
                         $query->orderbyDesc('projects_count');
-                    }
+                    } else {
+                        $query->orderBy('projects_count');
+                    }   
                     break;
                 case 'free': //暇
                     $query->selectRaw('employees.* , SUM(employee_project_hours) as total_hours')
@@ -65,6 +70,8 @@ class SearchController extends Controller
                         ->groupBy('employees.id');
                     if ($order === "desc") {
                         $query->orderbyDesc('total_hours');
+                    } else {
+                        $query->orderBy('total_hours');
                     }
                     break;
                 default:
@@ -107,21 +114,45 @@ class SearchController extends Controller
 
         switch($category) {
             case 'start_date':
-               $query->orderBy("start_date", $order);
+                switch($order){
+                    case "desc":
+                        query->orderByDesc("start_date");        
+                        break;
+                    default:
+                        query->orderBy("start_date");    
+                        break;
+                }
                break;
             case 'end_date':
-                $query->orderBy("end_date", $order);
+                switch($order){
+                    case "desc":
+                        query->orderByDesc("end_date");        
+                        break;
+                    default:
+                        query->orderBy("end_date");    
+                        break;
+                }
                 break;
             case "price":
-                $query->orderBy('cost', $order);
+                switch($order){
+                    case "desc":
+                        query->orderByDesc("cost");        
+                        break;
+                    default:
+                        $query->orderBy('cost');
+                        break;
+                }
                 break;
             case 'number_of_engineers':
                 $query->withCount('employees');
-                if ($order === 'desc') {
-                    $query->orderbyDesc('employees_count');
+                switch($order) {
+                    case "desc":
+                        $query->orderByDesc('employees_count');
+                        break;
+                    default:
+                        $query->orderBy('employees_count');
+                        break;
                 }
-                break;
-            default:
                 break;
         }
 
@@ -137,9 +168,9 @@ class SearchController extends Controller
         $query = Technology::query();
 
         if ($keyword and (strlen(trim($keyword))>0)) {
-            $query->where('name', 'like', '%' . $keyword . '%');
+            $query->where('name', 'like', '%' . $keyword . '%')
+                  ->orWhere('technology_field', 'like', '%' . $keyword . '%');
         }
-
         switch($category) {
             case "backend":
                $query->whereIn('technology_field', ["backend"]);
