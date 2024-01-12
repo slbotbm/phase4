@@ -32,6 +32,17 @@
                         </td>
                         <td class="py-4 px-6">
                             <div class="flex flex-col mb-4">
+                            <x-input-label for="speciality" :value="__('エンジニアの専門分野')" />
+                            <select id="speciality" name="speciality" class="block mt-1 w-full rounded-md shadow-sm focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                                <option value = "None" selected>未選定</option>
+                                <option value="frontend">フロントエンド</option>
+                                <option value="backend">バックエンド</option>
+                                <option value="server-side">サーバーサイド</option>
+                            </select>
+                            </div>
+                        </td>
+                        <td class="py-4 px-6">
+                            <div class="flex flex-col mb-4">
                             <x-input-label for="order" :value="__('順序')" />
                             <select id="order" name="order" class="block mt-1 w-full  rounded-md shadow-sm focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                                 <option value="desc">降順</option>
@@ -63,8 +74,7 @@
             </tbody>
             </table>
         </div>
-      </div>
-      {{$response->links()}}
+    </div>
     </div>
   </div>
 </x-app-layout>
