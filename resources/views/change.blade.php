@@ -14,7 +14,7 @@
                 height: 100%;
                 padding: 0px;
                 margin: 0px;
-                overflow: hidden;
+                overflow: scroll;
                 margin: 30px;
             }
             modal {
@@ -23,9 +23,17 @@
             botton_modal {
                 margin: 30px;
             }
-            .m-10{
-                margin: 50px;
+            .bblock {
+                display: block;
+                width: 30%;
+                padding-top: 1rem;
+                padding-bottom: 0rem;
             }
+            .ppp{
+                padding-top: 1rem;
+                padding-bottom: 0rem;
+            }
+            
         </style>
 
             <meta charset="UTF-8">
@@ -34,19 +42,37 @@
             <!-- モーダル用のスタイルシート（例: BootstrapのCSSを使用） -->
             <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
         </head>
-            <body>
+        <body>
+        
+        {{$name}}
+
+
+            <!-- ボタンをクリックするとモーダルが表示されるようにする -->
+            <h3>熟練側</h3>
+            @for ($i = 1; $i <= 10; $i++)
+            <div class="ppp col-md-4">
+                <botton_modal>
+                    <button type="button" class="btn btn-info bblock" data-toggle="modal" data-target="#myModal">
+                        名前：{{ $i }}<br>技術：フロント<br>言語：CSS
+                    </button>
+                </botton_modal>
+            </div>
+            @endfor
+            <!-- ボタンをクリックするとモーダルが表示されるようにする -->
+            <h3>若手側</h3>
+            @for ($i = 1; $i <= 3; $i++)
+            <div class="ppp">
+                <botton_modal>
+                    <button type="button" class="btn btn-success bblock" data-toggle="modal" data-target="#youModal">
+                        名前：{{ $i }}<br>技術：フロント<br>言語：CSS
+                    </button>
+                </botton_modal>
+            </div>
+            @endfor
 
 
 
             
-            <!-- ボタンをクリックするとモーダルが表示されるようにする -->
-            <div class="py-12">
-                <botton_modal class="w-75">
-                    <button type="button" class="btn btn-primary btn-block m-10" data-toggle="modal" data-target="#myModal">
-                        名前：名前<br>技術：フロント<br>言語：CSS
-                    </button>
-                </botton_modal>
-            </div>
             
             <!-- モーダルのコンテンツ -->
             <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -54,12 +80,12 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalLabel">ステータス変更</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                            <button type="button">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
                     </div>
                     <div class="modal-body">
-                        <a>名前：ｐｐｐｐｐｐｐｐｐｐｐｐｐｐｐｐｐｐ</a>
+                        <a>名前：ppppppppppppppppp</a>
                         <a></a>
                     </div>
                     <modal action="/submit" method="post" >

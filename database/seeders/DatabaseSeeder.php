@@ -30,7 +30,7 @@ class DatabaseSeeder extends Seeder
         $technology_names = array_keys(TechnologyFactory::$technology);
         foreach ($technology_names as $technology_name) {
             Technology::factory()->create([
-                'technology_name' => $technology_name,
+                'name' => $technology_name,
                 'technology_field' => TechnologyFactory::$technology[$technology_name],
             ]);
         }
@@ -55,10 +55,10 @@ class DatabaseSeeder extends Seeder
 
             $number_of_employees = rand(3, 6);
             $employees = Employee::inRandomOrder()->limit($number_of_employees)->distinct()->get();
+            $employee_project_hours = ceil($project->hours_required_per_month / $number_of_employees);
             foreach($employees as $employee) {
-                $project->employees()->attach($employee, ['employee_project_hours'=> rand(30, 60)] );
+                $project->employees()->attach($employee, ['employee_project_hours'=> $employee_project_hours] );
             }
         });
     }
 }
-;
