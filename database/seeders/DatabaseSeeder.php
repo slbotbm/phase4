@@ -46,7 +46,7 @@ class DatabaseSeeder extends Seeder
             }
         });
 
-        Project::factory(20)->create()->each(function($project){
+        Project::factory(30)->create()->each(function($project){
             $number_of_technologies = rand(3, 5);
             $technologies = Technology::inRandomOrder()->limit($number_of_technologies)->distinct()->get();
             foreach($technologies as $technology) {

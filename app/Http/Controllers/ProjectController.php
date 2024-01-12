@@ -13,13 +13,19 @@ class ProjectController extends Controller
         $projects = Project::orderBy('start_date', 'asc')->get();
         $tasks = [];
         $links = [];
+        $currentDateTime = new \DateTime();
 
         foreach ($projects as $project) {
             $duration = ($project->start_date->diff($project->end_date))->days;
-            if ($project->start_date > date("Y-m-d")) {
+            if ($project->start_date > $currentDateTime) {
                 $progress = 0;
             } else {
                 $progress = (($project->start_date->diff(date('Y-m-d')))->days)/$duration;
+            }
+            if ($progress === 0 || $progress >= 1) {
+                $open = false;
+            } else {
+                $open = true;
             }
             array_push(
                 $tasks,
@@ -30,33 +36,40 @@ class ProjectController extends Controller
                     "end_date"=>$project->end_date->format('Y-m-d'),
                     "type"=>"project",
                     "progress"=>$progress,
-                    "open"=>true,
+                    "open"=>$open,
                 ]
             );
 
             $employees = $project->employees()->get();
             $employee_count = $employees->count();
             $count = 0;
-            foreach ($employees as $employee) {
-                $employee_start_date = clone $project->start_date; 
-                $employee_start_date->modify('+' . floor($duration * $count / $employee_count) . ' days');
+            foreach ($employees as $employee) { 
+                $employee_start_date = $project->start_date->modify('+' . floor($duration * $count / $employee_count) . ' days');
                 $employee_duration = $duration/$employee_count;
-                if ($employee_start_date < date('Y-m-d')) {
-                    if ($project->end_date < date('Y-m-d')) {
-                        $employee_progress = ($employee_start_date->diff(date('Y-m-d'))->days/7)/$employee_duration;
+                if ($employee_start_date < $currentDateTime) {
+                    if ($project->end_date > $currentDateTime) {
+                        $employee_progress = ($employee_start_date->diff($project->end_date)->days/7)/$employee_duration;
                     } else {
                         $employee_progress = 1;
                     }
                 } else {
                     $employee_progress = 0;
                 }
-
+                $temp = $employee->technologies()->inRandomOrder()->first()->technology_field;
+                if ($temp == "frontend") {
+                    $text = "フロントエンド";
+                } elseif ($temp == "backend") {
+                    $text = "バックエンド";
+                } else {
+                    $text = "サーバーサイド";
+                }
 
                 array_push(
                     $tasks,
                     [
                         "id" => $project->id * 100 + $employee->id,
-                        "text" => $employee->name,
+                        "text" => $text,
+                        "owner"=>$employee->name,
                         "start_date" => $employee_start_date->format('Y-m-d'), 
                         "duration" => $employee_duration,
                         "progress"=>$employee_progress,
