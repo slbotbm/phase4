@@ -35,8 +35,8 @@
                             <div class="flex flex-col mb-4">
                             <x-input-label for="order" :value="__('順序')" />
                             <select id="order" name="order" class="block mt-1 w-full rounded-md shadow-sm focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                <option value="desc">降順</option>
-                                <option value="asc">昇順</option>
+                                <option value="asc">降順</option>
+                                <option value="desc">昇順</option>
                             </select>
                             </div>
                         </td>
