@@ -13,6 +13,20 @@
             margin: 0px;
             overflow: auto;
         }
+        .red .gantt_cell, .odd.red .gantt_cell,
+		.red .gantt_task_cell, .odd.red .gantt_task_cell {
+			background-color: #FDE0E0;
+		}
+
+		.green .gantt_cell, .odd.green .gantt_cell,
+		.green .gantt_task_cell, .odd.green .gantt_task_cell {
+			background-color: #BEE4BE;
+        }
+
+        .blue .gantt_cell, .odd.blue .gantt_cell,
+        .blue .gantt_task_cell, .odd.blue .gantt_task_cell {
+            background-color: #ADD8E6;
+        }
     </style>
     </head>
         <x-slot name="header">
@@ -25,52 +39,16 @@
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div id="gantt_here" style='width: 100%; height: 600px;'>         
                     <script>
-                        var hourToStr = gantt.date.date_to_str("%H:%i");
-                        var hourRangeFormat = function(step){
-                            return function(date){
-                                var intervalEnd = new Date(gantt.date.add(date, step, "day") - 1)
-                                return hourToStr(date) + " - " + hourToStr(intervalEnd);
-                            };
+                        gantt.templates.grid_row_class = function (start_date, end_date, item) {
+                            if (item.progress == 0) return "red";
+                            if (item.progress >= 1) return "green";
+                            if (item.progress >= 0) return "blue";
                         };
-
-                        gantt.config.min_column_width = 80;
-                        var zoomConfig = {
-		minColumnWidth: 80,
-		maxColumnWidth: 150,
-		levels: [
-			[
-				{ unit: "month", format: "%M %Y", step: 1},
-				{ unit: "week", step: 1, format: function (date) {
-						var dateToStr = gantt.date.date_to_str("%d %M");
-						var endDate = gantt.date.add(date, -6, "day");
-						var weekNum = gantt.date.date_to_str("%W")(date);
-						return "Week #" + weekNum + ", " + dateToStr(date) + " - " + dateToStr(endDate);
-					}}
-			],
-			[
-				{ unit: "month", format: "%M %Y", step: 1},
-				{ unit: "day", format: "%d %M", step: 1}
-			],
-			[
-				{ unit: "day", format: "%d %M", step: 1},
-				{ unit: "hour", format: hourRangeFormat(12), step: 12}
-			],
-			[
-				{unit: "day", format: "%d %M",step: 1},
-				{unit: "hour",format: hourRangeFormat(6),step: 6}
-			],
-			[
-				{ unit: "day", format: "%d %M", step: 1 },
-				{ unit: "hour", format: "%H:%i", step: 1}
-			]
-		],
-		useKey: "ctrlKey",
-		trigger: "wheel",
-		element: function(){
-			return gantt.$root.querySelector(".gantt_task");
-		}
-	}
-
+                        gantt.templates.task_row_class = function (start_date, end_date, item) {
+                            if (item.progress == 0) return "red";
+                            if (item.progress >= 1) return "green";
+                            if (item.progress >= 0) return "blue";
+                        };
                         gantt.config.date_format = "%Y-%m-%d"; 
                         gantt.i18n.setLocale("jp"); 
                         gantt.config.scales = [
@@ -83,7 +61,7 @@
                         gantt.config.columns = [
                                 {name:"text", label:"案件名", width:200, tree:true},
                                 {name:"start_date", label:"開始月日", align:"center"},
-                                {name:"end_date", label:"終了月日", align:"center"},
+                                {name:"end_date", label:"終了月日", width:100, align:"center"},
                             ];
                         gantt.init("gantt_here"); 
                         var jsonData = {!! $response->getContent() !!}; 

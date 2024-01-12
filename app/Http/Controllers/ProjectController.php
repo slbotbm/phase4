@@ -29,6 +29,7 @@ class ProjectController extends Controller
                     "start_date" => $project->start_date->format('Y-m-d'),
                     "end_date"=>$project->end_date->format('Y-m-d'),
                     "type"=>"project",
+                    "progress"=>$progress,
                     "open"=>true,
                 ]
             );
@@ -58,6 +59,7 @@ class ProjectController extends Controller
                         "text" => $employee->name,
                         "start_date" => $employee_start_date->format('Y-m-d'), 
                         "duration" => $employee_duration,
+                        "progress"=>$employee_progress,
                         "parent" => $project->id,
                     ]
                 );
