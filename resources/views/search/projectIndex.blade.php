@@ -75,7 +75,6 @@
             </table>
             </div>
         </div>
-            {{$response->links()}}
       </div>
     </div>
   </div>

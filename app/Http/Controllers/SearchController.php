@@ -26,16 +26,26 @@ class SearchController extends Controller
         $keyword = $request->keyword;
         $category = $request->category; 
         $order = $request->order;
+        $speciality = $request->speciality;
         $query = Employee::query();
 
         if ($keyword && strlen(trim($keyword)) > 0) {
             $query->where('name', 'like', '%' . $keyword . '%');
         }
-        if ($category === 'employment_start') {
+
+        
+        if (in_array($speciality, ['frontend', 'backend', 'server-side'])) {
+            $query->whereHas('technologies', function ($q) use ($speciality) {
+                $q->where('technology_field', $speciality);
+            });
+        }
+
+
+        if ($category === 'employment_start') { //就職の開始
             $query->orderBy("start_of_employment", $order);
         } else {
             switch ($category) {
-                case 'overtime':
+                case 'overtime': //残業
                     $query->selectRaw('employees.* , (160 - COALESCE(SUM(employee_project_hours), 0)) as remaining_hours')
                         ->leftJoin('employee_project', 'employees.id', '=', 'employee_project.employee_id')
                         ->groupBy('employees.id');
@@ -43,13 +53,13 @@ class SearchController extends Controller
                         $query->orderbyDesc('remaining_hours');
                     }
                     break;
-                case "number_of_projects":
+                case "number_of_projects": //案件の数
                     $query->withCount('projects');
                     if ($order === "desc") {
                         $query->orderbyDesc('projects_count');
                     }
                     break;
-                case 'free':
+                case 'free': //暇
                     $query->selectRaw('employees.* , SUM(employee_project_hours) as total_hours')
                         ->join('employee_project', 'employees.id', '=', 'employee_project.employee_id')
                         ->groupBy('employees.id');
@@ -63,7 +73,7 @@ class SearchController extends Controller
             
         }
 
-        $response = $query->paginate(20);
+        $response = $query->get();
         return response()->view("search.employeeIndex", compact("response"));
     }
 
@@ -115,7 +125,7 @@ class SearchController extends Controller
                 break;
         }
 
-        $response = $query->paginate(20);
+        $response = $query->get();
 
         return response()->view("search.projectIndex", compact("response"));
     }
@@ -144,7 +154,7 @@ class SearchController extends Controller
                 break;
         }
 
-        $response = $query->paginate(20);
+        $response = $query->get();
 
         return response()->view("search.technologyIndex", compact("response"));
     }
