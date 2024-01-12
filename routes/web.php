@@ -43,6 +43,9 @@ Route::middleware('auth')->group(function () {
 Route::get('/change', function () {
     return view('change');
 })->name('change.page');
+Route::get('/change/{id}', [EmployeeController::class, 'sendEmployeeInformationToChange'])->name('employee.getEmployeeData');
+
+// Route::get('/change', [EmployeeController::class, 'sendEmployeeInformationToChange'])->name('employee.getEmployeeData');
 
 
 require __DIR__.'/auth.php';

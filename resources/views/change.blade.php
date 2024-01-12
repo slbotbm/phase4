@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             {{ __('ステータス変更') }}
         </h2>
     </x-slot>
@@ -15,7 +15,7 @@
                 padding: 0px;
                 margin: 0px;
                 overflow: scroll;
-                margin: 30px;
+                {{-- margin: 30px; --}}
             }
             modal {
                 margin: 30px;
@@ -23,15 +23,17 @@
             botton_modal {
                 margin: 30px;
             }
+            .ppp{
+                float: left;
+                width: 30%;
+                box-sizing: border-box;
+                padding: 10px;
+            }
             .bblock {
                 display: block;
-                width: 30%;
-                padding-top: 1rem;
-                padding-bottom: 0rem;
-            }
-            .ppp{
-                padding-top: 1rem;
-                padding-bottom: 0rem;
+                width: 100%;
+                padding: 10px;
+                margin-bottom: 10px;
             }
             
         </style>
@@ -44,13 +46,14 @@
         </head>
         <body>
         
-        {{$name}}
-
+{{--         
+            <h1>{{ $employee->name }}</h1>
+            <p>{{ $employee->position }}</p>
+     --}}
 
             <!-- ボタンをクリックするとモーダルが表示されるようにする -->
-            <h3>熟練側</h3>
             @for ($i = 1; $i <= 10; $i++)
-            <div class="ppp col-md-4">
+            <div class="ppp ">
                 <botton_modal>
                     <button type="button" class="btn btn-info bblock" data-toggle="modal" data-target="#myModal">
                         名前：{{ $i }}<br>技術：フロント<br>言語：CSS
@@ -59,7 +62,6 @@
             </div>
             @endfor
             <!-- ボタンをクリックするとモーダルが表示されるようにする -->
-            <h3>若手側</h3>
             @for ($i = 1; $i <= 3; $i++)
             <div class="ppp">
                 <botton_modal>

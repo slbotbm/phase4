@@ -107,9 +107,9 @@
                         gantt.config.scale_height = 54; 
                         gantt.config.columns = [
                                 {name:"text", label:"案件名", width:200, tree:true},
-                                {name:"start_date", label:"開始月日", align:"center"},
-                                {name:"end_date", label:"終了月日", width:80, align:"center"},
-                                { name: "owner", label:"担当", width: 100, align: "center"}
+                                {name:"start_date", label:"開始予定日", align:"center"},
+                                {name:"end_date", label:"終了予定日", width:80, align:"center"},
+                                { name: "owner", label:"担当者", width: 100, align: "center"}
                             ];
                         gantt.init("gantt_here"); 
                         gantt.templates.link_class = function (link) {

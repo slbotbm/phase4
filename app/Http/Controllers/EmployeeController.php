@@ -157,4 +157,8 @@ class EmployeeController extends Controller
     {
         //
     }
+    public function sendEmployeeInformationToChange(string $id) {
+        $employee = Employee::find($id);
+        return response()->view("change", compact("employee"));
+    }
 }

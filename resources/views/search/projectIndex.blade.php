@@ -21,13 +21,24 @@
                     <tr class="hover:bg-gray-lighter">
                         <td class="py-4 px-6">
                             <div class="flex flex-col mb-4">
-                            <x-input-label for="category" :value="__('エンジニアのカテゴリー')" />
+                            <x-input-label for="condition" :value="__('プロジェクトの状況')" />
+                            <select id="condition" name="condition" class="block mt-1 w-full rounded-md shadow-sm focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                                <option value="None">未選択</option>
+                                <option value="before_creation">受注前</option>
+                                <option value="in_creation">構築中</option>
+                                <option value="after_creation">納品済み</option>
+                            </select>
+                            </div>
+                        </td>
+                        <td class="py-4 px-6">
+                            <div class="flex flex-col mb-4">
+                            <x-input-label for="category" :value="__('プロジェクトの予定')" />
                             <select id="category" name="category" class="block mt-1 w-full rounded-md shadow-sm focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                                 <option value="None" selected>未選択</option>
                                 <option value="start_date">開始日</option>
                                 <option value="end_date">終了日</option>
-                                <option value="price">金額</option>
-                                <option value="number_of_engineers">エンジニアの数</option>
+                                <option value="price">費用</option>
+                                <option value="number_of_engineers">エンジニアの人数</option>
                             </select>
                             </div>
                         </td>
@@ -37,17 +48,6 @@
                             <select id="order" name="order" class="block mt-1 w-full rounded-md shadow-sm focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                                 <option value="asc">降順</option>
                                 <option value="desc">昇順</option>
-                            </select>
-                            </div>
-                        </td>
-                        <td class="py-4 px-6">
-                            <div class="flex flex-col mb-4">
-                            <x-input-label for="condition" :value="__('案件の状況')" />
-                            <select id="condition" name="condition" class="block mt-1 w-full rounded-md shadow-sm focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                                <option value="None">未選択</option>
-                                <option value="before_creation">受注前</option>
-                                <option value="in_creation">構築中</option>
-                                <option value="after_creation">納品済み</option>
                             </select>
                             </div>
                         </td>
