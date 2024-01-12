@@ -34,13 +34,13 @@ class SearchController extends Controller
         }
 
         if ($speciality !== "None") {
-            $query
-                ->select('employees.*')
+            $subQuery = Employee::selectRaw('employee_id')->distinct()
                 ->join('employee_technology', 'employees.id', '=', 'employee_technology.employee_id')
                 ->join('technologies', 'employee_technology.technology_id', '=', 'technologies.id')
-                ->where('technologies.technology_field', $speciality)
-                ->groupBy('employees.id', 'technologies.id');;
-        }
+                ->where('technologies.technology_field', $speciality);
+
+            $query->whereIn('employees.id', $subQuery);
+}
 
         if ($category === 'employment_start') { //就職の開始
             $query->orderBy("start_of_employment", $order);
@@ -49,7 +49,8 @@ class SearchController extends Controller
                 case 'overtime': //残業
                     $query->selectRaw('employees.* , (160 - COALESCE(SUM(employee_project_hours), 0)) as remaining_hours')
                         ->leftJoin('employee_project', 'employees.id', '=', 'employee_project.employee_id')
-                        ->groupBy('employees.id');
+                        ->groupBy('employees.id')
+                        ->having('remaining_hours', '<=', 0);
                     if ($order === "desc") {
                         $query->orderbyDesc('remaining_hours');
                     } else {
