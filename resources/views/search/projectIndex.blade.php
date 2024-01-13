@@ -24,7 +24,7 @@
                             <x-input-label for="condition" :value="__('プロジェクトの状況')" />
                             <select id="condition" name="condition" class="block mt-1 w-full rounded-md shadow-sm focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                                 <option value="None">未選択</option>
-                                <option value="before_creation">受注前</option>
+                                <option value="before_creation">構築前</option>
                                 <option value="in_creation">構築中</option>
                                 <option value="after_creation">納品済み</option>
                             </select>

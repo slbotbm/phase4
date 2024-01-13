@@ -60,19 +60,6 @@
                     </button>
                 </botton_modal>
             </div>
-            @endfor
-            <!-- ボタンをクリックするとモーダルが表示されるようにする -->
-            @for ($i = 1; $i <= 3; $i++)
-            <div class="ppp">
-                <botton_modal>
-                    <button type="button" class="btn btn-success bblock" data-toggle="modal" data-target="#youModal">
-                        名前：{{ $i }}<br>技術：フロント<br>言語：CSS
-                    </button>
-                </botton_modal>
-            </div>
-            @endfor
-
-
 
             
             
@@ -104,13 +91,7 @@
                             <br>
 
                             <label for="selectMenu">プロダクト名</label><br>
-                            <select id="selectMenu" onchange="handleSelection()">
-                                <option value="option1">オプション1</option>
-                                <option value="option2">オプション2</option>
-                                <option value="option3">オプション3</option>
-                                <option value="option4">オプション4</option>
-                            </select>
-                            <p id="selectedOption">選択されたオプションはここに表示されます。</p>
+                            <p id="selectedOption">（出来ればプロジェクト名を入れたい）</p>
                     </modal>
 
                 </div>

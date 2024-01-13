@@ -36,7 +36,7 @@
                                 <option value = "None" selected>未選定</option>
                                 <option value="free">空き状況</option>
                                 <option value="overtime">残業時間</option>
-                                <option value="employment_start">入社歴</option>
+                                <option value="employment_start">在籍年数</option>
                                 <option value="number_of_projects">案件数</option>
                             </select>
                             </div>

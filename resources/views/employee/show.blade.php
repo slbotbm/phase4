@@ -30,7 +30,7 @@
               </p>
             </div>
             <div class="flex flex-col mb-4">
-              <p class="mb-2 uppercase font-bold text-lg text-gray-800 dark:text-gray-200">就職の開始</p>
+              <p class="mb-2 uppercase font-bold text-lg text-gray-800 dark:text-gray-200">在籍年数</p>
               <p class="py-2 px-3 text-gray-800 dark:text-gray-200" id="description">
                 {{$employee->start_of_employment->format("Y-m-d")}}
               </p>
@@ -65,13 +65,13 @@
                 @endif
             </div>
             <div class="flex flex-col mb-4">
-              <p class="mb-2 uppercase font-bold text-lg text-gray-800 dark:text-gray-200">月あたりの労働時間数</p>
+              <p class="mb-2 uppercase font-bold text-lg text-gray-800 dark:text-gray-200">月あたりの労働時間</p>
               <p class="py-2 px-3 text-gray-800 dark:text-gray-200" id="description">
                 <p class="py-2 px-3 text-gray-800 dark:text-gray-200" id="description">{{ $hours}}</p>
               </p>
             </div>
             <div class="flex flex-col mb-4">
-              <p class="mb-2 uppercase font-bold text-lg text-gray-800 dark:text-gray-200">残業</p>
+              <p class="mb-2 uppercase font-bold text-lg text-gray-800 dark:text-gray-200">月あたりの残業時間</p>
               <p class="py-2 px-3 text-gray-800 dark:text-gray-200" id="description">
                 @if (160-$hours < 0)
                 <p class="py-2 px-3 text-gray-800 dark:text-gray-200" id="description">
