@@ -91,10 +91,10 @@ class SearchController extends Controller
     }
 
     public function projectSearch(Request $request) {
-        $keyword = $request->keyword;
-        $category = $request->category;
-        $order = $request->order;
-        $status = $request->condition;
+        $keyword = ($request->keyword === "None") ? null : $request->keyword;
+        $category = ($request->category === "None") ? null : $request->category; 
+        $order = ($request->order === "None") ? null : $request->order;
+        $status = ($request->condition === "None") ? null : $request->condition;
 
         $query = Project::query();
 
@@ -168,8 +168,8 @@ class SearchController extends Controller
     }
 
     public function technologySearch(Request $request) {
-        $keyword = $request->keyword;
-        $category = $request->category;
+        $keyword = ($request->keyword === "None") ? null : $request->keyword;
+        $category = ($request->category === "None") ? null : $request->category; 
 
         $query = Technology::query();
 
