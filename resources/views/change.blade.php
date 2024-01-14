@@ -1,6 +1,6 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
             {{ __('ステータス変更') }}
         </h2>
     </x-slot>
@@ -14,8 +14,8 @@
                 height: 100%;
                 padding: 0px;
                 margin: 0px;
-                overflow: hidden;
-                margin: 30px;
+                overflow: scroll;
+                {{-- margin: 30px; --}}
             }
             modal {
                 margin: 30px;
@@ -23,9 +23,19 @@
             botton_modal {
                 margin: 30px;
             }
-            .m-10{
-                margin: 50px;
+            .ppp{
+                float: left;
+                width: 30%;
+                box-sizing: border-box;
+                padding: 10px;
             }
+            .bblock {
+                display: block;
+                width: 100%;
+                padding: 10px;
+                margin-bottom: 10px;
+            }
+            
         </style>
 
             <meta charset="UTF-8">
@@ -34,19 +44,24 @@
             <!-- モーダル用のスタイルシート（例: BootstrapのCSSを使用） -->
             <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
         </head>
-            <body>
+        <body>
+        
+{{--         
+            <h1>{{ $employee->name }}</h1>
+            <p>{{ $employee->position }}</p>
+     --}}
 
-
-
-            
             <!-- ボタンをクリックするとモーダルが表示されるようにする -->
-            <div class="py-12">
-                <botton_modal class="w-75">
-                    <button type="button" class="btn btn-primary btn-block m-10" data-toggle="modal" data-target="#myModal">
-                        名前：名前<br>技術：フロント<br>言語：CSS
+            @for ($i = 1; $i <= 10; $i++)
+            <div class="ppp ">
+                <botton_modal>
+                    <button type="button" class="btn btn-info bblock" data-toggle="modal" data-target="#myModal">
+                        名前：{{ $i }}<br>技術：フロント<br>言語：CSS
                     </button>
                 </botton_modal>
             </div>
+
+            
             
             <!-- モーダルのコンテンツ -->
             <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -54,12 +69,12 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalLabel">ステータス変更</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                            <button type="button">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
                     </div>
                     <div class="modal-body">
-                        <a>名前：ｐｐｐｐｐｐｐｐｐｐｐｐｐｐｐｐｐｐ</a>
+                        <a>名前：ppppppppppppppppp</a>
                         <a></a>
                     </div>
                     <modal action="/submit" method="post" >
@@ -76,13 +91,7 @@
                             <br>
 
                             <label for="selectMenu">プロダクト名</label><br>
-                            <select id="selectMenu" onchange="handleSelection()">
-                                <option value="option1">オプション1</option>
-                                <option value="option2">オプション2</option>
-                                <option value="option3">オプション3</option>
-                                <option value="option4">オプション4</option>
-                            </select>
-                            <p id="selectedOption">選択されたオプションはここに表示されます。</p>
+                            <p id="selectedOption">（出来ればプロジェクト名を入れたい）</p>
                     </modal>
 
                 </div>
