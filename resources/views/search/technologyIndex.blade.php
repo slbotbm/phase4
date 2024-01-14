@@ -13,9 +13,6 @@
             <div class="flex flex-col mb-4">
               <x-input-label for="keyword" :value="__('キーワード')" />
               <x-text-input id="keyword" class="block mt-1 w-full" type="text" name="keyword" :value="old('keyword')" autofocus />
-            </div>
-            
-            <div class="flex flex-col mb-4">
             <x-input-label for="category" :value="__('技術のカテゴリー')" />
             <select id="category" name="category" class="block mt-1 w-full rounded-md shadow-sm focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                 <option value="None">未選択</option>
@@ -23,13 +20,14 @@
                 <option value="frontend">フロントエンド</option>
                 <option value="serverside">サーバーサイド</option>
             </select>
-            </div>
+          </div>
 
             @include('common.errors')
               <x-primary-button class="ml-3" style="background-color: #9acd23">
                 {{ __('検索') }}
               </x-primary-button>
             </div>
+
           </form>
           <table class="text-center w-full border-collapse">
           <tbody>

@@ -51,9 +51,9 @@
                             </div>
                         </td>
                         <td>
-                          <x-primary-button class="ml-3">
-                {{ __('検索') }}
-              </x-primary-button>
+                          <x-primary-button class="ml-3" style="background: #40e0d0">
+                            {{ __('検索') }}
+                          </x-primary-button>
                         </td>
                     </tr>
                 </tbody>
