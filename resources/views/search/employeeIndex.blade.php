@@ -67,7 +67,6 @@
               <tr class="hover:bg-gray-lighter">
                 <td class="py-4 px-6 border-b border-gray-light dark:border-gray-600">
                   <h3 class="text-left font-bold text-lg text-gray-dark dark:text-gray-200"><a href="{{route('employee.show', $employee->id)}}">{{$employee->name}}</a></h3>
-                  <h3 class="text-left font-bold text-lg text-gray-dark dark:text-gray-200">{{$employee->remaining_hours}}</h3>
                 </td>
               </tr>
             @endforeach
