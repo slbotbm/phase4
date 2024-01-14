@@ -74,9 +74,6 @@
                         gantt.plugins({
                             marker: true
                         });
-                        gantt.templates.progress_text = function (start, end, task) {
-                            return "<span style='text-align:left;'>" + Math.round(task.progress * 100) + "% </span>";
-                        };
                         gantt.templates.grid_row_class = function (start_date, end_date, item) {
                             if (item.progress == 0) return "red";
                             if (item.progress >= 1) return "green";
