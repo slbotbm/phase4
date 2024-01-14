@@ -23,12 +23,12 @@
                         {{ __('検索') }}
                     </x-nav-link>
                 </div>
-                <!-- Navigation Links change -->
+                <!-- Navigation Links change
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('change.page')" :active="request()->routeIs('change.page')">
                         {{ __('ステータス変更') }}
                     </x-nav-link>
-                </div>
+                </div> -->
 
             </div>
 
@@ -91,12 +91,12 @@
                 {{ __('検索') }}
             </x-responsive-nav-link>
         </div>
-        <!-- Navigation Links change -->
+        <!-- Navigation Links change
         <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
             <x-nav-link :href="route('search.input')" :active="request()->routeIs('search.input')">
                 {{ __('ステータス変更') }}
             </x-nav-link>
-        </div>
+        </div> -->
 
 
         <!-- Responsive Settings Options -->
