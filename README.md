@@ -4,7 +4,7 @@
 1.**ガントチャート：** 現在、様々な案件に取り組んでいるチームすべての情報の可視化する機能です。
 ![image](https://github.com/slbotbm/phase4/assets/45287790/8f8117a6-5594-43d0-b992-cdc89e2ffab3)
 ![image](https://github.com/slbotbm/phase4/assets/45287790/51d7c2e7-193c-49b5-9839-a52046da8afd)
-2. **検索機能：** 案件、エンジニア、と技術二つて様々な条件のもとで検索ができ、会社全体がより深く理解できます。
+2. **検索機能：** 案件、エンジニア、と技術につて様々な条件のもとで検索ができ、会社全体がより深く理解できます。
 ![image](https://github.com/slbotbm/phase4/assets/45287790/c8db629f-d7df-492c-8d40-1c08c8013a4c)
 ![image](https://github.com/slbotbm/phase4/assets/45287790/4c2ee066-8040-4981-9fc9-2bc575258515)
 ![image](https://github.com/slbotbm/phase4/assets/45287790/f15ee4ba-1428-47a4-8839-9be0fb46a92a)
